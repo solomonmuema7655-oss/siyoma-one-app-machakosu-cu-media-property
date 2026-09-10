@@ -16,7 +16,6 @@ jobs:
           mkdir project
           unzip -q -o SIYOMA_ONE_APP-MACHAKOS_UNIVERSITY_CU_MEDIA_PROPERTY_BUILD_1.zip -d project
           echo "Project extracted successfully"
-          echo "Project files:"
           find project -maxdepth 3 -type f | head -100
 
       - name: Set up Java 17
@@ -36,11 +35,13 @@ jobs:
         run: |
           curl -L -o gradle.zip https://services.gradle.org/distributions/gradle-8.7-bin.zip
           unzip -q -o gradle.zip
+          echo "Gradle installed:"
+          ls -la gradle-8.7/bin/
 
       - name: Build APK
         run: |
           cd project/android
-          ../gradle-8.7/bin/gradle assembleDebug --no-daemon
+          ../../gradle-8.7/bin/gradle assembleDebug --no-daemon
 
       - name: Check APK
         run: |
